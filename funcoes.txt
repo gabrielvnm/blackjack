@@ -1,0 +1,46 @@
+
+ Carta* inicializarBaralho()
+- Cria um baralho completo com todas as 52 cartas e retorna a cabeça da lista encadeada.
+- Não recebe parâmetros.
+- Retorna: ponteiro para o início do baralho (lista de cartas)
+
+---
+
+void embaralharBaralho(Carta** baralho)
+- Embaralha o baralho de forma aleatória.
+- Parâmetro:
+  - baralho: ponteiro para a lista de cartas (baralho)
+
+---
+
+Carta* comprarCarta(Carta** baralho)
+- Remove a primeira carta do baralho e a retorna, simulando uma compra.
+- Parâmetro:
+  - baralho: ponteiro para o topo do baralho (lista encadeada)
+- Retorna: ponteiro para a carta comprada
+
+---
+
+jogador criarJogador(const char* nome)
+- Inicializa um jogador com nome e mão vazia.
+- Parâmetro:
+  - nome: nome do jogador
+- Retorna: struct Jogador inicializada
+
+---
+
+void turnoDoJogador(Jogador* jogador, Carta** baralho)
+- Executa o turno de um jogador, comprando cartas até decidir parar ou ultrapassar 21.
+- Parâmetros:
+  - jogador: ponteiro para struct Jogador
+  - baralho: ponteiro para o baralho de onde comprar cartas
+
+---
+
+ void turnoDoDealer(Jogador* dealer, Carta** baralho)
+- Executa o turno automático do dealer (o dealer compra até ter 17 ou mais pontos).
+- Parâmetros:
+  - dealer: ponteiro para struct Jogador representando o dealer
+  - baralho: ponteiro para o baralho de onde comprar cartas
+
+

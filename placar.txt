@@ -1,2 +1,6 @@
 gabriel: 26
 Dealer: 20
+gabriel: 18
+Dealer: 20
+gabriel: 21
+Dealer: 19

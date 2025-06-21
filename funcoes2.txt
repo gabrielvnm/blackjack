@@ -1,0 +1,52 @@
+
+ Carta* criarCarta(Naipe naipe, Valor valor)
+- Cria uma nova carta do baralho com o naipe e valor definidos.
+- Parâmetros:
+  - naipe: o naipe da carta (COPAS, OUROS, etc.)
+  - valor: valor da carta (AS, DOIS... REI)
+- Retorno: ponteiro para a nova carta criada.
+
+---
+
+ void adicionarCarta(Carta** mao, Carta* nova)
+- Adiciona uma nova carta à mão do jogador (lista encadeada).
+- Parâmetros:
+  - mao: ponteiro para a lista de cartas (mão)
+  - nova: nova carta a ser adicionada à mão
+
+---
+
+void liberarMao(Carta* mao)
+- Libera a memória de todas as cartas da mão do jogador após o fim da rodada.
+- Parâmetro:
+  - mao: início da lista encadeada de cartas do jogador
+
+---
+
+ int calcularPontuacao(Carta* mao)
+- Calcula a pontuação da mão de um jogador. Ases contam como 11 se não ultrapassar 21.
+- Parâmetro:
+  - mao: lista encadeada das cartas da mão
+- Retorno: soma da pontuação da mão
+
+---
+
+void imprimirMao(Carta* mao)
+- Mostra no terminal todas as cartas que o jogador possui na mão.
+- Parâmetro:
+  - mao: lista de cartas
+
+---
+
+ void salvarPontuacao(const char* nome, int pontuacao)
+- Salva o nome e a pontuação do jogador no arquivo placar.txt.
+- Parâmetros:
+  - nome: nome do jogador
+  - pontuacao: pontuação final obtida
+
+---
+
+ void exibirPlacar()
+- Exibe o conteúdo do placar.txt, mostrando as pontuações salvas.
+- Sem parâmetros.
+
