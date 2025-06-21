@@ -1,45 +1,40 @@
-
 #ifndef BLACKJACK_H
 #define BLACKJACK_H
 
+#define MAX_NOME_JOGADOR 25
 
-
-// ENUMS
 typedef enum {
-    COPAS,
-    OUROS,
-    ESPADAS,
-    PAUS
+    COPAS, OUROS, PAUS, ESPADAS
 } Naipe;
 
 typedef enum {
-    DOIS = 2, TRES, QUATRO, CINCO, SEIS,
-    SETE, OITO, NOVE, DEZ,
-    VALETE = 10, DAMA = 10, REI = 10, AS = 11
-} ValorCarta;
+    AS = 1, DOIS, TRES, QUATRO, CINCO, SEIS, SETE, OITO, NOVE, DEZ, VALETE, DAMA, REI
+} Valor;
 
-// STRUCTS
 typedef struct Carta {
     Naipe naipe;
-    ValorCarta valor;
-    struct Carta* proxima;
+    Valor valor;
+    struct Carta* prox;
 } Carta;
 
-typedef struct {
+typedef struct Jogador {
+    char nome[50];
     Carta* mao;
     int pontuacao;
-    int venceu;
 } Jogador;
 
-// FUNÇÕES
-Carta* criarCarta(Naipe naipe, ValorCarta valor);
-void adicionarCarta(Carta** mao, Naipe naipe, ValorCarta valor);
+Carta* criarCarta(Naipe naipe, Valor valor);
+void adicionarCarta(Carta** mao, Carta* nova);
+void liberarMao(Carta* mao);
 int calcularPontuacao(Carta* mao);
-void liberarCartas(Carta* mao);
+void imprimirMao(Carta* mao);
+void salvarPontuacao(const char* nome, int pontuacao);
+void exibirPlacar();
+Carta* inicializarBaralho();
 void embaralharBaralho(Carta** baralho);
-void iniciarBaralho(Carta** baralho);
-Carta* puxarCarta(Carta** baralho);
-void salvarPontuacao(const char* nomeArquivo, int pontuacao);
-void exibirPontuacoes(const char* nomeArquivo);
+Carta* comprarCarta(Carta** baralho);
+Jogador criarJogador(const char* nome);
+void turnoDoJogador(Jogador* jogador, Carta** baralho);
+void turnoDoDealer(Jogador* dealer, Carta** baralho);
 
 #endif

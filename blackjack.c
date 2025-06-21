@@ -1,117 +1,165 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <locale.h>
 #include "blackjack.h"
 
-Carta* criarCarta(Naipe naipe, ValorCarta valor) {
+Carta* criarCarta(Naipe naipe, Valor valor) {
     Carta* nova = (Carta*)malloc(sizeof(Carta));
     nova->naipe = naipe;
     nova->valor = valor;
-    nova->proxima = NULL;
+    nova->prox = NULL;
     return nova;
 }
 
-void adicionarCarta(Carta** mao, Naipe naipe, ValorCarta valor) {
-    Carta* nova = criarCarta(naipe, valor);
-    nova->proxima = *mao;
+void adicionarCarta(Carta** mao, Carta* nova) {
+    nova->prox = *mao;
     *mao = nova;
+}
+
+void liberarMao(Carta* mao) {
+    while (mao) {
+        Carta* temp = mao;
+        mao = mao->prox;
+        free(temp);
+    }
 }
 
 int calcularPontuacao(Carta* mao) {
     int total = 0;
     int ases = 0;
 
-    while (mao != NULL) {
-        int val = mao->valor;
-        if (val == AS) ases++;
-        total += val;
-        mao = mao->proxima;
+    while (mao) {
+        if (mao->valor >= DEZ)
+            total += 10;
+        else
+            total += mao->valor;
+
+        if (mao->valor == AS)
+            ases++;
+
+        mao = mao->prox;
     }
 
-    while (total > 21 && ases > 0) {
-        total -= 10; // trata AS como 1 em vez de 11
+    while (ases > 0 && total + 10 <= 21) {
+        total += 10;
         ases--;
     }
 
     return total;
 }
 
-void liberarCartas(Carta* mao) {
-    while (mao != NULL) {
-        Carta* temp = mao;
-        mao = mao->proxima;
-        free(temp);
+void imprimirMao(Carta* mao) {
+    while (mao) {
+        printf("Carta: %d de %d\n", mao->valor, mao->naipe);
+        mao = mao->prox;
     }
 }
 
-void iniciarBaralho(Carta** baralho) {
-    for (int n = 0; n < 4; n++) {
-        for (int v = 2; v <= 11; v++) {
-            if (v == 11) {
-                adicionarCarta(baralho, n, AS);
-            } else if (v > 10) {
-                adicionarCarta(baralho, n, 10);
-                adicionarCarta(baralho, n, 10);
-                adicionarCarta(baralho, n, 10);
-                break;
-            } else {
-                adicionarCarta(baralho, n, v);
-            }
-        }
-    }
-}
-
-void embaralharBaralho(Carta** baralho) {
-    // Simples shuffle: converte lista em array, embaralha e reconverte.
-    Carta* array[52];
-    int i = 0;
-    Carta* temp = *baralho;
-    while (temp) {
-        array[i++] = temp;
-        temp = temp->proxima;
-    }
-    srand(time(NULL));
-    for (int j = 0; j < i; j++) {
-        int k = rand() % i;
-        Carta* t = array[j];
-        array[j] = array[k];
-        array[k] = t;
-    }
-    *baralho = NULL;
-    for (int j = 0; j < i; j++) {
-        array[j]->proxima = *baralho;
-        *baralho = array[j];
-    }
-}
-
-Carta* puxarCarta(Carta** baralho) {
-    if (*baralho == NULL) return NULL;
-    Carta* topo = *baralho;
-    *baralho = topo->proxima;
-    topo->proxima = NULL;
-    return topo;
-}
-
-void salvarPontuacao(const char* nomeArquivo, int pontuacao) {
-    FILE* arquivo = fopen(nomeArquivo, "a");
+void salvarPontuacao(const char* nome, int pontuacao) {
+    FILE* arquivo = fopen("placar.txt", "a");
     if (arquivo) {
-        fprintf(arquivo, "Pontuação: %d\n", pontuacao);
+        fprintf(arquivo, "%s: %d\n", nome, pontuacao);
         fclose(arquivo);
     }
 }
 
-void exibirPontuacoes(const char* nomeArquivo) {
-    char linha[100];
-    FILE* arquivo = fopen(nomeArquivo, "r");
+void exibirPlacar() {
+    FILE* arquivo = fopen("placar.txt", "r");
     if (arquivo) {
-        printf("Pontuações anteriores:\n");
+        char linha[100];
+        printf("\n--- PLACAR ---\n");
         while (fgets(linha, sizeof(linha), arquivo)) {
             printf("%s", linha);
         }
         fclose(arquivo);
+        printf("---------------\n");
     } else {
-        printf("Nenhuma pontuação registrada ainda.\n");
+        printf("Placar ainda não disponível.\n");
+    }
+}
+
+
+
+// Cria todas as 52 cartas do baralho
+Carta* inicializarBaralho() {
+    Carta* baralho = NULL;
+    for (int n = 0; n < 4; n++) {
+        for (int v = AS; v <= REI; v++) {
+            Carta* nova = criarCarta((Naipe)n, (Valor)v);
+            adicionarCarta(&baralho, nova);
+        }
+    }
+    return baralho;
+}
+
+// Embaralha as cartas (simplificação: embaralha movendo aleatoriamente para nova lista)
+void embaralharBaralho(Carta** baralho) {
+    srand(time(NULL));
+    Carta* embaralhado = NULL;
+    int total = 0;
+
+    // Conta o total de cartas
+    for (Carta* temp = *baralho; temp; temp = temp->prox) total++;
+
+    while (total > 0) {
+        int index = rand() % total;
+        Carta** atual = baralho;
+        for (int i = 0; i < index; i++) atual = &(*atual)->prox;
+
+        Carta* selecionada = *atual;
+        *atual = selecionada->prox;
+        selecionada->prox = embaralhado;
+        embaralhado = selecionada;
+        total--;
+    }
+    *baralho = embaralhado;
+}
+
+// Remove a primeira carta do baralho e retorna ela
+Carta* comprarCarta(Carta** baralho) {
+    if (*baralho == NULL) return NULL;
+    Carta* carta = *baralho;
+    *baralho = carta->prox;
+    carta->prox = NULL;
+    return carta;
+}
+
+// Cria um jogador com nome e mão vazia
+Jogador criarJogador(const char* nome) {
+    Jogador jogador;
+    strcpy(jogador.nome, nome);
+    jogador.mao = NULL;
+    jogador.pontuacao = 0;
+    return jogador;
+}
+
+// Turno manual do jogador: compra enquanto quiser ou até estourar 21
+void turnoDoJogador(Jogador* jogador, Carta** baralho) {
+    char escolha;
+    do {
+        Carta* nova = comprarCarta(baralho);
+        adicionarCarta(&jogador->mao, nova);
+        jogador->pontuacao = calcularPontuacao(jogador->mao);
+        printf("\n%s comprou uma carta. Pontuação atual: %d\n", jogador->nome, jogador->pontuacao);
+        imprimirMao(jogador->mao);
+
+        if (jogador->pontuacao >= 21) break;
+
+        printf("Deseja comprar mais uma carta? (s/n): ");
+        scanf(" %c", &escolha);
+    } while (escolha == 's');
+}
+
+// Turno automático do dealer: compra até ter 17 ou mais
+void turnoDoDealer(Jogador* dealer, Carta** baralho) {
+    while (1) {
+        dealer->pontuacao = calcularPontuacao(dealer->mao);
+        if (dealer->pontuacao >= 17) break;
+
+        Carta* nova = comprarCarta(baralho);
+        adicionarCarta(&dealer->mao, nova);
+        printf("Dealer comprou uma carta. Pontuação atual: %d\n", dealer->pontuacao);
     }
 }
