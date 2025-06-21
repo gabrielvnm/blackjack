@@ -1,0 +1,2 @@
+gabriel: 26
+Dealer: 20
