@@ -1,2 +1,6 @@
 gabriel: 5
 Dealer: 25
+luiza: 24
+Dealer: 20
+Dealer venceu!
+---------------------

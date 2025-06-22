@@ -6,6 +6,7 @@
 #include "blackjack.h"
 
 int main(){
+    setlocale(LC_ALL, "pt_BR");
     
     char c;
     int op = 0;
