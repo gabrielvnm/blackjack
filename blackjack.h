@@ -36,5 +36,8 @@ Carta* comprarCarta(Carta** baralho);
 Jogador criarJogador(const char* nome);
 void turnoDoJogador(Jogador* jogador, Carta** baralho);
 void turnoDoDealer(Jogador* dealer, Carta** baralho);
+int limpar_stdin();
+void sairComQualquerTecla();
+void exibirRegras();
 
 #endif
