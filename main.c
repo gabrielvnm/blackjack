@@ -6,7 +6,7 @@
 #include "blackjack.h"
 
 int main(){
-    setlocale(LC_ALL, "pt_BR");
+    setlocale(LC_ALL, "pt_BR.UTF-8");
     
     char c;
     int op = 0;
@@ -53,6 +53,7 @@ int main(){
                     printf("Pontuacao dealer: %d\n",dealer.pontuacao);
                     salvarPontuacao(nome_jogador,jogador1.pontuacao);
                     salvarPontuacao(dealer.nome,dealer.pontuacao);
+                    salvarJogo(jogador1.nome);
                 }
                 else if(jogador1.pontuacao<21 && dealer.pontuacao>21){
                     printf("Voce venceu!\n");
@@ -60,6 +61,7 @@ int main(){
                     printf("Pontuacao dealer: %d\n",dealer.pontuacao);
                     salvarPontuacao(nome_jogador,jogador1.pontuacao);
                     salvarPontuacao(dealer.nome,dealer.pontuacao);
+                    salvarJogo(jogador1.nome);
                 }
                 else if(jogador1.pontuacao<21 && jogador1.pontuacao>dealer.pontuacao){
                     printf("Voce venceu!\n");
@@ -67,6 +69,7 @@ int main(){
                     printf("Pontuacao dealer: %d\n",dealer.pontuacao);
                     salvarPontuacao(nome_jogador,jogador1.pontuacao);
                     salvarPontuacao(dealer.nome,dealer.pontuacao);
+                    salvarJogo(jogador1.nome);
                 }
                 else if(jogador1.pontuacao<21 && jogador1.pontuacao<dealer.pontuacao){
                     printf("Voce perdeu!\n");
@@ -74,6 +77,7 @@ int main(){
                     printf("Pontuacao dealer: %d\n",dealer.pontuacao);
                     salvarPontuacao(nome_jogador,jogador1.pontuacao);
                     salvarPontuacao(dealer.nome,dealer.pontuacao);
+                    salvarJogo(dealer.nome);
                 }                
                 break;
             }

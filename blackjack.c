@@ -183,15 +183,15 @@ void turnoDoDealer(Jogador* dealer, Carta** baralho) {
     }
 }
 void exibirRegras(){
-    printf("Valor das Cartas:\n -Cartas de 2 a 10 possuem o valor delas mesmo.\n     Exemplo: 2 vale 2, 5 vale 5 e assim até o 10\n");
-    printf("-J, Q, K = valem 10 \n -Ás (A) = pode valer 1 ou 11 (depende o que for melhor pra você\n\n");
-    printf("\r------------Como o jogo funciona:------------\n");
-    printf("-Cada jogador recebe 2 cartas.\n");
-    printf("-O dealer (a banca) também recebe 2 cartas, geralmente uma virada pra cima e outra virada pra baixo. Você pode:\n   ->Pedir carta (Hit): você quer mais uma carta.\n ->Parar (Stand): não quer mais cartas.\n");
-    printf("-Quando todos param ou 'estouram' (passam de 21), o dealer joga:\n O dealer revela a carta escondida e compra até ter pelo menos 17 pontos\n");
-    printf("\r------------Você perde:------------\n");
-    printf("-Se sua mão passar de 21 pontos, você 'estoura' (bust) e perde.\n -Se o dealer tiver mais pontos que você (sem estourar), você perde.\n");
-    printf("\r------------Você ganha:------------\n");
-    printf("-Ter 21 pontos direto nas 2 primeiras cartas (chamado >>Blackjack<<) — é a mão perfeita!\n -Ter mais pontos que o dealer, sem passar de 21.\n -O dealer 'estourar' (passar de 21 pontos).");
+    printf("Valor das Cartas------------\n1)Cartas de 2 a 10 possuem o valor delas mesmo.\n    -->Exemplo: 2 vale 2, 5 vale 5 e assim até o 10\n");
+    printf("2)J, Q, K = valem 10 \n3)Ás (A) = pode valer 1 ou 11 (depende o que for melhor pra você\n\n");
+    printf("Como o jogo funciona------------\n");
+    printf("1)Cada jogador recebe 2 cartas.\n");
+    printf("2)O dealer (a banca) também recebe 2 cartas, geralmente uma virada pra cima e outra virada pra baixo. Você pode:\n  -->Pedir carta (Hit): você quer mais uma carta.\n   -->Parar (Stand): não quer mais cartas.\n");
+    printf("3)Quando todos param ou 'estouram' (passam de 21), o dealer joga:\n O dealer revela a carta escondida e compra até ter pelo menos 17 pontos\n");
+    printf("Você perde------------\n");
+    printf("1)Se sua mão passar de 21 pontos, você 'estoura' (bust) e perde.\n2)Se o dealer tiver mais pontos que você (sem estourar), você perde.\n");
+    printf("Você ganha------------\n");
+    printf("1)Ter 21 pontos direto nas 2 primeiras cartas (chamado >>Blackjack<<) — é a mão perfeita!\n2)Ter mais pontos que o dealer, sem passar de 21.\n3)O dealer 'estourar' (passar de 21 pontos).");
     return;
 }
