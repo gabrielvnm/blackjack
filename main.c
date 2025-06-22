@@ -29,7 +29,7 @@ int main(){
             default:
                 printf("Erro! Digite uma opcao valida!\n");
                 break;
-            case 1:
+            case 1:{
                 Jogador jogador1 = criarJogador(nome_jogador);
                 Jogador dealer = criarJogador("Dealer");
                 Carta* baralho = inicializarBaralho();
@@ -75,6 +75,7 @@ int main(){
                     salvarPontuacao(dealer.nome,dealer.pontuacao);
                 }                
                 break;
+            }
             case 2:
                 exibirPlacar();
                 
