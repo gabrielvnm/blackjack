@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include "blackjack.h"
 
+
 int limpar_stdin(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF)
@@ -179,15 +180,6 @@ void turnoDoDealer(Jogador* dealer, Carta** baralho) {
         Carta* nova = comprarCarta(baralho);
         adicionarCarta(&dealer->mao, nova);
         imprimirMao(dealer->mao);       
-    }
-}
-void sairComQualquerTecla(){
-    printf("Aperte qualquer tecla para continuar: \n");
-    while (1){
-        if (_kbhit()){
-            char tecla = getch();
-            break;
-        }
     }
 }
 void exibirRegras(){

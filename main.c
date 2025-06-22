@@ -18,7 +18,7 @@ int main(){
     printf("Nome do jogador: %s\n",nome_jogador);
 
     while (op!=4){
-        //validação de input do usuario, pra se ele digitar alguma coisa que nao é integer
+        //validação de input do usuario, se ele digitar alguma coisa que nao é integer
         do{
             printf("Selecione uma opção:\n");
             printf("1: Novo Jogo\n2: Ver histórico de pontuação\n3: Regras\n4: Sair\n");
@@ -44,6 +44,7 @@ int main(){
                     printf("Pontuacao dealer: %d\n",dealer.pontuacao);
                     salvarPontuacao(nome_jogador,jogador1.pontuacao);
                     salvarPontuacao(dealer.nome,dealer.pontuacao);
+                    salvarJogo(dealer.nome);
                 }
                 else if(jogador1.pontuacao == 21){
                     printf("Voce venceu!\n");
@@ -76,11 +77,11 @@ int main(){
                 break;
             case 2:
                 exibirPlacar();
-                sairComQualquerTecla();
+                
                 break;
             case 3:
                 exibirRegras();
-                sairComQualquerTecla();
+                
                 break;
             case 4:
                 break;
