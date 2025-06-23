@@ -1,6 +1,49 @@
-gabriel: 5
-Dealer: 25
-luiza: 24
+---------------------
+julio: 19
 Dealer: 20
 Dealer venceu!
+---------------------
+gabriel: 23
+Dealer: 19
+Dealer venceu!
+---------------------
+gabriel: 23
+Dealer: 20
+Dealer venceu!
+---------------------
+gabriel: 27
+Dealer: 19
+Dealer venceu!
+---------------------
+gabriel: 20
+Dealer: 19
+gabriel venceu!
+---------------------
+gabriel: 26
+Dealer: 21
+Dealer venceu!
+---------------------
+gabriel: 26
+Dealer: 21
+Dealer venceu!
+---------------------
+gabriel: 18
+Dealer: 23
+gabriel venceu!
+---------------------
+Julia: 22
+Dealer: 19
+Dealer venceu!
+---------------------
+Julia: 25
+Dealer: 20
+Dealer venceu!
+---------------------
+Julia: 22
+Dealer: 20
+Dealer venceu!
+---------------------
+Julia: 18
+Dealer: 25
+Julia venceu!
 ---------------------

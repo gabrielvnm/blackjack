@@ -78,22 +78,27 @@ int main(){
                     salvarPontuacao(nome_jogador,jogador1.pontuacao);
                     salvarPontuacao(dealer.nome,dealer.pontuacao);
                     salvarJogo(dealer.nome);
+                }
+                else {
+                    printf("Voce perdeu!\n");
+                    printf("Pontuacao jogador %s: %d\n",nome_jogador,jogador1.pontuacao);
+                    printf("Pontuacao dealer: %d\n",dealer.pontuacao);
+                    salvarPontuacao(nome_jogador,jogador1.pontuacao);
+                    salvarPontuacao(dealer.nome,dealer.pontuacao);
+                    salvarJogo(dealer.nome);
                 }                
                 break;
             }
             case 2:
-                exibirPlacar();
-                
+                exibirPlacar();                
                 break;
             case 3:
-                exibirRegras();
-                
+                exibirRegras();                
                 break;
             case 4:
-                break;
-            
-        }
-        printf("Encerrando jogo!\n");
+                break;            
+        }       
     }
+    printf("Encerrando jogo!\n");
     return 0;
 }

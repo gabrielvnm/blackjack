@@ -7,6 +7,7 @@
 #include "blackjack.h"
 
 
+
 int limpar_stdin(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF)
@@ -96,8 +97,6 @@ void exibirPlacar() {
         printf("Placar ainda não disponível.\n");
     }
 }
-
-
 
 // Cria todas as 52 cartas do baralho
 Carta* inicializarBaralho() {
@@ -192,6 +191,6 @@ void exibirRegras(){
     printf("Você perde------------\n");
     printf("1)Se sua mão passar de 21 pontos, você 'estoura' (bust) e perde.\n2)Se o dealer tiver mais pontos que você (sem estourar), você perde.\n");
     printf("Você ganha------------\n");
-    printf("1)Ter 21 pontos direto nas 2 primeiras cartas (chamado >>Blackjack<<) — é a mão perfeita!\n2)Ter mais pontos que o dealer, sem passar de 21.\n3)O dealer 'estourar' (passar de 21 pontos).");
+    printf("1)Ter 21 pontos direto nas 2 primeiras cartas (chamado >>Blackjack<<) — é a mão perfeita!\n2)Ter mais pontos que o dealer, sem passar de 21.\n3)O dealer 'estourar' (passar de 21 pontos).\n");
     return;
 }
